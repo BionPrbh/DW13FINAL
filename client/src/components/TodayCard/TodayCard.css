@@ -1,0 +1,24 @@
+.TodayCard {
+    height: 350px;
+    width: 300px;
+    background-color: chartreuse;
+}
+.today-card-container{
+    height: 50%;
+    width: 100%;
+    background-color: cornflowerblue;
+}
+.today-card-image{
+    height: 100%;
+    width: 100%;
+    background-color: yellow;
+}
+.today-card-content{
+    height: 30%;
+    width: 100%;
+    display: flex;
+}
+.today-card-content-description{
+    height: 70%;
+    width: 100%;
+}

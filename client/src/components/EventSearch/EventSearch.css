@@ -1,0 +1,16 @@
+.event-search{
+    height: 10vh;
+    width: 100%;
+    background-color: red;
+    display: flex;
+    justify-content: center;
+    
+}
+
+.event-search-container {
+    height: 100%;
+    width: 80%;
+    background-color: thistle;
+    display: flex;
+    justify-content: center;
+}
