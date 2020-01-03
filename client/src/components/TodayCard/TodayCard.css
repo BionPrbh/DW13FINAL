@@ -1,22 +1,38 @@
 .TodayCard {
     height: 350px;
     width: 300px;
-    background-color: chartreuse;
+    box-shadow: 0 8px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    border: 1px solid lightgray;
+    border-radius: 8px;
+    background-color: white;
+}
+.today-card-image{
+    display: flex;
+    justify-content: right;
+    flex-direction: row;
 }
 .today-card-container{
     height: 50%;
     width: 100%;
-    background-color: cornflowerblue;
+    object-fit: cover;
+    background-size: cover;
+    background-position: center;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
 }
 .today-card-image{
     height: 100%;
     width: 100%;
-    background-color: yellow;
 }
 .today-card-content{
     height: 30%;
     width: 100%;
     display: flex;
+}
+.today-card-content-title{
+    display: flex;
+    flex-direction: column;
 }
 .today-card-content-description{
     height: 70%;

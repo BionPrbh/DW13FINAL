@@ -1,0 +1,26 @@
+.category-page{
+  width: 100%;
+  height: 160vh;
+  background-color: #f5e0df;
+}
+
+.category-page-container{
+  display: flex;
+  justify-content: center;
+}
+
+.category-page-content{
+  width: 80%;
+  height: 145vh;
+}
+
+.category-page-chooser{
+  display: flex;
+  justify-self: center;
+}
+
+.category-page-content-card{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}

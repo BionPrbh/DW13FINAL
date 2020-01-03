@@ -9,19 +9,17 @@ exports.newOrder = (req,res) => {
       Orders.findOne({
         include:[
           {
-            model:Events,
+            model: Events,
             as:'event',
+            attributes:{
+              exclude:[
+                "category_id",
+                "user_id",
+                "createdAt",
+                "updatedAt"
+              ]
+            },
             include:[
-              {
-                model: Categories,
-                as: 'category',
-                attributes: {
-                  exclude:[
-                    "createdAt",
-                    "updatedAt"
-                  ]
-                }
-              },
               {
                 model: Profiles,
                 as: 'created_by',
@@ -33,19 +31,30 @@ exports.newOrder = (req,res) => {
                     "updatedAt"
                   ]
                 }
-              }
-            ],
-            attributes:{
-              exclude:[
-                "category_id",
-                "createdAt",
-                "updatedAt"
-              ]
-            }
+              },
+              {
+                model: Categories,
+                as: 'category',
+                attributes: {
+                  exclude:[
+                    "createdAt",
+                    "updatedAt"
+                  ]
+                }
+              },
+            ]
           }
         ],
         where:{
           id: data.id
+        },
+        attributes:{
+          exclude:[
+            "createdAt",
+            "updatedAt",
+            "event_id",
+            "user_id"
+          ]
         }
       })
       .then(result => {
@@ -81,52 +90,74 @@ exports.confirmOrder = (req,res) => {
 
 exports.getAllConfirmed = (req,res) => {
   let states = req.query.status
-  let status = ''
-  if(states === 'approved'){
-    status = 'confirmed'
-    Orders.findAll({
-      include:[
-        {
-          model:Events,
-          as:'event',
-          attributes:{
-            exclude:[
-                 
-            ]
-          },
-          include:[
-            {
-              model:Categories,
-              as:'category'
-            },
-            {
-              model:Profiles,
-              as:'created_by'
-            }
+  console.log(req.query.status);  
+  Orders.findAll({
+    include:[
+      {
+        model:Events,
+        as:'event',
+        attributes:{
+          exclude:[
+            'category_id',
+            'user_id',
+            'createdAt',
+            'updatedAt',    
           ]
         },
-        {
-          model:Profiles,
-          as:'buyer',
-          attributes:{
-            exclude:[
-              
-            ]
+        include:[
+          {
+            model:Categories,
+            as:'category',
+            attributes:{
+              exclude:[
+                'createdAt',
+                'updatedAt',
+              ]
+            } 
+          },
+          {
+            model:Profiles,
+            as:'created_by',
+            attributes:{
+              exclude:[
+                'createdAt',
+                'updatedAt',
+                'password'
+              ]
+            }
           }
+        ]
+      },
+      {
+        model:Profiles,
+        as:'buyer',
+        attributes:{
+          exclude:[
+            'createdAt',
+            'updatedAt',
+            'password'
+          ]
         }
-      ],
-      where:{
-        status:status
       }
+    ],
+    where:{
+      status: states
+    },
+    attributes:{
+      exclude:[
+        'event_id',
+        'createdAt',
+        'updatedAt'
+      ]
+    }
+  })
+    .then(data => {
+      res.status(200).json(data)
     })
-      .then(data => {
-        res.status(200).json(data)
+    .catch(err => {
+      res.status(500).json({
+        msg:'Internal server error',
+        err
       })
-      .catch(err => {
-        res.status(500).json({
-          msg:'Internal server error',
-          err
-        })
-      })
-  }
+    })
 }

@@ -16,11 +16,13 @@ module.exports = (sequelize, DataTypes) => {
     // associations can be defined here
     Event.belongsTo(models.Category, {
       foreignKey: 'category_id',
-      as:'category'
+      as:'category',
+      sourceKey:'id'
     });
     Event.belongsTo(models.User, {
       foreignKey: 'user_id',
-      as:'created_by'
+      as:'created_by',
+      sourceKey:'id'
     });
   };
   return Event;

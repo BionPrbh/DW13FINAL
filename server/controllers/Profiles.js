@@ -130,50 +130,81 @@ exports.getFavorited = (req,res) => {
   Favorites.findAll({
     where:{
       user_id: req.params.id
+    },
+    include:[
+      {
+        model: Events,
+        as: 'favoritedEvent',
+        attributes: {
+          exclude:[
+            "createdAt",
+            "updatedAt"
+          ]
+        }
+      },
+      {
+        model: Profiles,
+        as: 'favoritedBy',
+        attributes: {
+          exclude:[
+            "createdAt",
+            "updatedAt",
+            "password"
+          ]
+        }
+      }
+    ],
+    attributes:{
+      exclude:[
+        "user_id",
+        "event_id",
+        "createdAt",
+        "updatedAt"
+      ]
     }
   }).then(data => {
+
     // let favorited = []
     // data.map((details) => {
-    //   Events.findAll({
-        // include:[
-        //   {
-        //     model: Categories,
-        //     as: 'category',
-        //     attributes: {
-        //       exclude:[
-        //         "createdAt",
-        //         "updatedAt"
-        //       ]
-        //     }
-        //   },
-        //   {
-        //     model: Profiles,
-        //     as: 'created_by',
-        //     attributes: {
-        //       exclude:[
-        //         "password",
-        //         "img",
-        //         "createdAt",
-        //         "updatedAt"
-        //       ]
-        //     }
-        //   }
-        // ],
-        // attributes:{
-        //   exclude:[
-        //     "category_id",
-        //     "createdAt",
-        //     "updatedAt"
-        //   ]
-        // },
+      // Events.findAll({
+      //   include:[
+      //     {
+      //       model: Categories,
+      //       as: 'category',
+      //       attributes: {
+      //         exclude:[
+      //           "createdAt",
+      //           "updatedAt"
+      //         ]
+      //       }
+      //     },
+      //     {
+      //       model: Profiles,
+      //       as: 'created_by',
+      //       attributes: {
+      //         exclude:[
+      //           "password",
+      //           "img",
+      //           "createdAt",
+      //           "updatedAt"
+      //         ]
+      //       }
+      //     }
+      //   ],
+      //   attributes:{
+      //     exclude:[
+      //       "category_id",
+      //       "createdAt",
+      //       "updatedAt"
+      //     ]
+      //   },
       //   where:{
       //     id: details.event_id
       //   }
-      // }).then(eachEvent => {
-      //   favorited.push(eachEvent)
+      // }).then(data => {
+      //   res.status(200).json(data)
       // })
       // })
-      // res.status(200).json(data)
       res.send(data)
     })
     // console.log(favorited);

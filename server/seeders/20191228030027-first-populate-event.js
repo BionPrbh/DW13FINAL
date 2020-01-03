@@ -15,7 +15,7 @@ module.exports = {
    return queryInterface.bulkInsert('Events', [
     {
       title:'Rosa',
-      category_id: '2',
+      category_id: '1',
       startTime: '2019-12-30 18:00:00',
       endTime: '2019-12-30 23:00:00',
       price: '250000',
@@ -56,7 +56,7 @@ module.exports = {
      updatedAt: new Date()
     },{
       title:'Raisa',
-      category_id: '2',
+      category_id: '3',
       startTime: '2019-12-30 18:00:00',
       endTime: '2019-12-30 23:00:00',
       price: '5000000',
@@ -70,7 +70,7 @@ module.exports = {
     },
     {
       title:'Maudy Ayunda',
-      category_id: '2',
+      category_id: '3',
       startTime: '2019-12-30 18:00:00',
       endTime: '2019-12-30 23:00:00',
       price: '2500000',
@@ -84,7 +84,7 @@ module.exports = {
     },
     {
       title:'Fariz',
-      category_id: '2',
+      category_id: '3',
       startTime: '2019-12-30 18:00:00',
       endTime: '2019-12-30 23:00:00',
       price: '50000',

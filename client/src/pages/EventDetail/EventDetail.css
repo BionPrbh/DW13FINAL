@@ -1,0 +1,43 @@
+.event-detail{
+  background-color: #f5e0df;
+  
+}
+.event-detail-card-container{
+  height: 150vh;
+  display: flex;
+  justify-content: center;
+}
+.event-detail-card{
+  width: 80%;
+  background-color: white;
+  border: 2px solid transparent;
+  border-radius: 10px 10px;
+  -webkit-box-shadow: 3px 3px 14px -4px rgba(0,0,0,1);
+  -moz-box-shadow: 3px 3px 14px -4px rgba(0,0,0,1);
+  box-shadow: 3px 3px 14px -4px rgba(0,0,0,1);
+}
+
+.event-detail-description{
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+}
+.event-detail-description-container{
+  width: 80%;
+  display: flex;
+  justify-content: space-evenly;
+}
+.event-detail-description-text{
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  text-align: center;
+}
+.event-detail-description-location{
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  text-align: center;
+}

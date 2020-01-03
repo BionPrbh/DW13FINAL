@@ -6,10 +6,10 @@ import './EventSearch.css'
 class EventSearch extends Component {
   render(){
     return (
-      <div className="event-search">
+      <div className="event-search" style={{paddingTop: 70}}>
        <div className="event-search-container">
-        <form noValidate autoComplete="off" >
-          <TextField id="standard-basic" label="Standard" className="event-search-input"/>
+        <form noValidate autoComplete="off">
+          <TextField id="standard-basic" label="Standard" style={{width:"70vw"}}/>
         </form>
         <IconButton>
           <SearchIcon />

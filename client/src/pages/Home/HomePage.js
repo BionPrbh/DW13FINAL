@@ -1,15 +1,13 @@
 import React, { Component } from 'react'
-// import HomeComponent from '../../components/HomeComponent/HomeComponent'
 import NavBar from '../../components/Navbar/Navbar'
 import EventSearch from '../../components/EventSearch/EventSearch'
 import CategoriesBar from '../../components/CategoriesBar/CategoriesBar'
 import TodayBar from '../../components/TodayBar/TodayBar'
 import { connect } from 'react-redux'
+import UpcomingEvent from '../../components/UpcomingEvent/UpcomingEvent'
+import Footer from '../../components/Footer/Footer'
 
 class Home extends Component {
-  componentDidMount() {
-    // this.props.getCategories()
-  }
   render() {
     return (
       <div>
@@ -17,6 +15,8 @@ class Home extends Component {
         <EventSearch />
         <CategoriesBar />
         <TodayBar />
+        <UpcomingEvent />
+        <Footer />
       </div>
     )
   }

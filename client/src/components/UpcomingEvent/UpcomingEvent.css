@@ -1,0 +1,28 @@
+.upcomingevent{
+  height: 120vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding-top: 50;
+  background-color: #f5e0df;
+}
+.upcomingevent-container{
+  height: 100%;
+  width: 80%;
+  justify-content: center;
+
+}
+.upcomingevent-title{
+  height: 7%;
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+
+}
+.upcomingevent-content{
+  height: 80%;
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}

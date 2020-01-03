@@ -1,30 +1,37 @@
 import React, { Component } from 'react'
 import './TodayBar.css'
 import TodayCard from '../TodayCard/TodayCard'
-// import { connect } from 'react-redux'
+import { connect } from 'react-redux'
+import { getStartTime } from '../../_actions/events'
 
 class TodayBar extends Component {
-  // componentDidMount() {
-
-  // }
+  componentDidMount() {
+    this.props.getStartTime()
+  }
   render(){
-    // const { data, isLoading, error } = 
-    // this.props.categories
+    const { data, isLoading, error } = this.props.event
+    console.log(data,' ===============> ini data dari startTime');
+    
     return(
-      <div className="todaybar">
+      <div className="todaybar" style={{paddingTop: 50}}>
         <div className="todaybar-container">
           <div className="todaybar-title">
             <h1 style={{marginTop:0, marginBottom:0}}>Today</h1>
           </div>
           <div className="todaybar-content">
-            <TodayCard />
-            <TodayCard />
-            <TodayCard />
-            <TodayCard />
-            <TodayCard />
-            <TodayCard />
-            <TodayCard />
-            <TodayCard />
+            {
+              data.map((details, index) => {
+                return(
+                  <TodayCard key={index}
+                    cardImage={details.img}
+                    cardTitle={details.title}
+                    cardDate={details.startTime.slice(0,10)}
+                    cardDesc={details.description}
+                    cardPrice={details.price}
+                  />
+                )
+              })
+            }
           </div>
         </div>
       </div>
@@ -32,29 +39,19 @@ class TodayBar extends Component {
   }
 }
 
-// const mapStateToProps = state => {
-//   return {
-//     // state ini ngambil dari combine reducers/store.js
-//     // categories: state.categories
-//     categories: state.categories
-//   }
-// }
+const mapStateToProps = state => {
+  return {
+    event: state.eventToday
+  }
+}
 
-// const mapDispatchToProps = dispatch => {
-//   return {
-//     // getCategories: () => {
-//       // membuat function getCategories() yang di define pada line 45 yang nantinya akan di nyalakan di line 8
-//       // dispatch(getCategories())
-//     // }
-//     getCategories: () => {
-//       dispatch(getCategories())
-//     }
-//   }
-// }
+const mapDispatchToProps = dispatch => {
+  return {
+    getStartTime: () => { dispatch(getStartTime())}
+  }
+}
 
-// export default connect(
-//   mapStateToProps,
-//   mapDispatchToProps
-// )(TodayBar)
-
-export default TodayBar
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(TodayBar)

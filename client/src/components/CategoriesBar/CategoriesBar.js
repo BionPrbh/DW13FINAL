@@ -2,16 +2,15 @@ import React, { Component } from 'react'
 import './CategoriesBar.css'
 import { connect } from 'react-redux'
 import { getCategories } from '../../_actions/categories'
+import { Button } from '@material-ui/core'
 
 class CategoriesBar extends Component {
   componentDidMount() {
     this.props.getCategories()
-    // getCategories()
   }
+
   render(){
-    const { data } = this.props.categories
-    console.log('-----------------------------ini dataaaaaaaa',data);
-    
+    const { data } = this.props.categories    
     return(
       <div className="categories-bar">
         <div className="categories-bar-container">
@@ -22,8 +21,11 @@ class CategoriesBar extends Component {
             {
               data.map((details) => {
                 return(
-                  <button style={{width:200, fontSize:25}}>{details.name}</button>
-                )
+                  <Button 
+                    className="categoryButton"  
+                    href={"/category/"+details.id+"/event"}
+                    style={{width:200, fontSize:15, fontWeight:'bold',borderRadius:5, border:'0px', boxShadow:"0 8px 8px 0 rgba(0,0,0,0.2)", transition: '0.3s',height:40, color:'white', backgroundColor:'black'}}>{details.name}</Button>
+                  )
               })
             }
           </div>
@@ -35,13 +37,13 @@ class CategoriesBar extends Component {
 
 const mapStateToProps = state => {
   return {
-    categories: state.categories
+    categories: state.categoriesAll,
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    getCategories: () => dispatch(getCategories()) 
+    getCategories: () => dispatch(getCategories()),
   }
 }
 
