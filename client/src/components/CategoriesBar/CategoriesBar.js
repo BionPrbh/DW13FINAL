@@ -20,9 +20,9 @@ class CategoriesBar extends Component {
           </div>
           <div className="bar">
             {
-              data.map((details, index) => {
+              data.map((details) => {
                 return(
-                  <button style={{width:200, fontSize:25}} key={index}>{details.name}</button>
+                  <button style={{width:200, fontSize:25}}>{details.name}</button>
                 )
               })
             }

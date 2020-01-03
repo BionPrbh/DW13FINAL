@@ -8,8 +8,8 @@ class EventSearch extends Component {
     return (
       <div className="event-search">
        <div className="event-search-container">
-        <form noValidate autoComplete="off">
-          <TextField id="standard-basic" label="Standard" />
+        <form noValidate autoComplete="off" >
+          <TextField id="standard-basic" label="Standard" className="event-search-input"/>
         </form>
         <IconButton>
           <SearchIcon />
