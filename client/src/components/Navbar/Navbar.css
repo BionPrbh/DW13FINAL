@@ -1,15 +1,14 @@
 .Navbar{
-   height: 7vh;
+   height: 12vh;
    width: 100%;
-   background-color: teal;
    display: flex;
    justify-content: center;
+   background-color: #ff5555;
 }
 
 .navbar-container {
    width: 80%;
    height: 100%;
-   background-color: thistle;
    display: flex;
    justify-content: space-between;
 }

@@ -1,0 +1,21 @@
+.profile{
+  width: 100%;
+  background-color: #f5e0df;
+}
+
+.profile-navbar-container{
+  width: 100%;
+}
+
+.profile-content-data{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 12vh;
+}
+.profile-content-favorited{
+  width: 100%;
+}
+.profile-footer-container{
+  width: 100%;
+}

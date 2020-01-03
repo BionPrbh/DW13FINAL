@@ -20,9 +20,8 @@ const CategoriesController = require("./controllers/Categories")
 const EventsController = require("./controllers/Events");
 const OrdersController = require("./controllers/Orders")
 const ProfilesController = require('./controllers/Profiles')
-const AuthController = require("./controllers/Auth");
 
-const TestController = require('./controllers/test')
+const { auth } = require('./helpers/middleware')
 
 //Create get Response
 app.get("/", (req, res) => {
@@ -31,19 +30,18 @@ app.get("/", (req, res) => {
 });
 
 app.group("/api/v1", router => {
-
-  // test router
-  router.get('/tes', TestController.Test)
-  
   // // ------ CATEGORIES ------
+  // get one category
+  router.get('/category/:id', CategoriesController.getOneCategory)
   // get all categories
   router.get('/categories', CategoriesController.getAllCategories)
   // get all events with the same category
   router.get('/category/:id/events', CategoriesController.getAllEventsOfACategory)
 
-
   // // ------- EVENTS ------
-  // get events with start_time=2019-12-31
+  // get events by title
+  router.get('/events', EventsController.getEventByTitle)
+  // get events with start_time=2019-12-30
   router.get('/events', EventsController.getEventsQueryToday)
   // get events with start_time_gte=2019-12-31
   // router.get('/events', EventsController.getEventsQueryTomorrow)
@@ -54,12 +52,12 @@ app.group("/api/v1", router => {
 
   
   // // ------ ORDER ------
+  // GET order with query status approved
+  router.get('/orders', OrdersController.getAllConfirmed)
   // POST an order 
   router.post('/order', OrdersController.newOrder );
   // PUT an order 
-  router.put('/order/:id', OrdersController.confirmOrder );
-  // GET order with query status approved
-  router.get('/orders', OrdersController.getAllConfirmed)
+  router.put('/order/:id', auth, OrdersController.confirmOrder );
 
   // //  ------ USERS ------
   // Login account

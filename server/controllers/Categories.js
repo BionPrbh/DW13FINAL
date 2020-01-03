@@ -58,3 +58,19 @@ exports.getAllEventsOfACategory = (req,res) => {
     res.status(200).json(data)
   })
 }
+
+exports.getOneCategory = (req,res) =>{
+  Categories.findOne({
+    where:{
+      id: req.params.id
+    }
+  }).then(data => {
+    res.status(200).json(data)
+  })
+    .catch(err => {
+      res.status(500).json({
+        msg:'Internal Server Error',
+        err
+      })
+    })
+}

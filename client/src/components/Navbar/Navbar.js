@@ -1,49 +1,59 @@
 import React, { Component} from 'react'
-import { IconButton } from '@material-ui/core'
+import { IconButton, Link, Avatar } from '@material-ui/core'
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import PersonAddIcon from '@material-ui/icons/PersonAdd';
 import './Navbar.css'
-import Axios from 'axios'
+import Logo from '../../LogoImage/dumbtick.png'
+import PopOver from '../../components/PopOver/PopOver'
 
 class Navbar extends Component {
-  constructor(props){
-    super(props)
-    this.state = {
-      container:[
-
-      ]
-    }
+  handleButtonLogout = () => {
+    localStorage.clear()
   }
   componentDidMount() {
-    Axios
-      .get('http://localhost:8000/api/v1/categories')
-      .then(res => {
-        this.setState({
-          container: res.data
-        })
-      })
+    
   }
   render(){
-    return(
-      <div className="Navbar">
-        <div className="navbar-container">
-          <div className="title">
-            <h1 style={{marginTop:0, marginBottom:0}}>DUMB-THICK</h1>
+    let existed = localStorage.getItem("_AUTH_TOKEN")
+    let loginRegisButton
+    const authbutton = (token) => {
+      if (token) {
+        return loginRegisButton = 
+        <div className="popOver">
+          <div>
+            <PopOver />
           </div>
-          <div className="icon-container">
+        </div>
+      } else {
+        return loginRegisButton = 
+          <div className="icon-container" style={{marginTop: 20}}>
             <div>
-              <IconButton>
-                <PersonAddIcon />
-                <h3 style={{marginTop:0, marginBottom:0}}>Register</h3>
-              </IconButton>
+              <Link href="/register" color="inherit">
+                <IconButton>
+                  <PersonAddIcon />
+                  <h3 style={{marginTop:0, marginBottom:0}}>Register</h3>
+                </IconButton>
+              </Link>
             </div>
             <div>
+            <Link href="/login" color="inherit">
               <IconButton>
                 <ExitToAppIcon />
                 <h3 style={{marginTop:0, marginBottom:0}}>Login</h3>
               </IconButton>
+            </Link> 
             </div>
           </div>
+      }
+    }
+    authbutton(existed)
+    return(
+      <div className="Navbar">
+        <div className="navbar-container">
+          <div className="title">
+            <img src={Logo} alt=""/>
+          </div>
+            { loginRegisButton }
         </div>
       </div>
     )

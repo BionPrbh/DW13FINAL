@@ -1,12 +1,13 @@
-import { POST_ORDER, PUT_ORDER, GET_APPROVED } from '../config/constanst'
+import { POST_ORDER, PUT_ORDER, GET_APPROVED } from '../config/constants'
 import axios from 'axios'
 
-export const postOrder = () => {
+export const postOrder = (newOrder) => {
   return {
     type: POST_ORDER,
     payload: axios({
       method: "POST",
-      url: "http://localhost:8000/api/v1/order"
+      url: "http://localhost:8000/api/v1/order",
+      data: newOrder
     })
   }
 }
@@ -24,7 +25,7 @@ export const getApproved = () => {
     type: GET_APPROVED,
     payload: axios({
       method: "GET",
-      url: "http://localhost:8000/api/v1/orders"
+      url: "http://localhost:8000/api/v1/orders?status=approved"
     })
   }
 }
