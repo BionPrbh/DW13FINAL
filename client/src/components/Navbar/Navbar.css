@@ -4,6 +4,7 @@
    display: flex;
    justify-content: center;
    background-color: #ff5555;
+   box-shadow: 0 2px 2px -1px gray
 }
 
 .navbar-container {

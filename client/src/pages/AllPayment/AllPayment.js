@@ -4,21 +4,21 @@ import NavBar from '../../components/Navbar/Navbar'
 import Footer from '../../components/Footer/Footer'
 import Ticket from '../../components/Ticket/Ticket'
 import { withRouter } from 'react-router-dom'
-import { getApproved } from '../../_actions/orders'
+import { getAllPending } from '../../_actions/orders'
 
-export class MyTicket extends Component {
+export class AllPayment extends Component {
   componentDidMount() {
-    this.props.getApproved()
+    this.props.getAllPending()
   }
   render() {
-    const { data } = this.props.approved
-    console.log(data);
+    const { pendingData } = this.props.pending
+    console.log(pendingData);
     return (
       <div>
         <NavBar />
         <div className="payment-content-container" style={{backgroundColor:"#f5e0df"}}>
           <div className="payment-content" style={{marginTop:70}}>
-            <p style={{ fontSize:37, fontWeight:'bold',color:'#ff5555', marginBottom:0}}>My Ticket</p>
+            <p style={{ fontSize:37, fontWeight:'bold',color:'#ff5555', marginBottom:0}}>Cart</p>
             <div style={{display:'flex', height: '10vh', textAlign:'center'}}>
               <div style={{width:'50%'}}></div>
             </div>
@@ -27,9 +27,9 @@ export class MyTicket extends Component {
             <div style={{width:'100%', height:"100%", backgroundColor:'white', display:'flex', justifyContent:"center", marginBottom:130}}>
               <div style={{width:'80%', height:"100%"}}>
                 {
-                  data.map((value, key) => {
+                  pendingData.map((value, key) => {
                     return (
-                      <div style={{marginTop:70, marginBottom:70}}>
+                      <div style={{marginTop:70, marginBottom:70}} key={key}>
                         <Ticket 
                           ticketHolderName={value.buyer ? value.buyer.name : ''}
                           ticketHolderId={value.user_id}
@@ -37,6 +37,8 @@ export class MyTicket extends Component {
                           ticketEventName={value.event ? value.event.title : ''}
                           ticketDateTime={value.event ? value.event.startTime : ''}
                           ticketEventPlace={value.event ? value.event.address : ''}
+                          pendingTicket
+                          pendingTicketId={value.id}
                         />
                       </div>
                     )
@@ -52,18 +54,18 @@ export class MyTicket extends Component {
   }
 }
 
-const mapStateToProps = (state,ownProps) => {
+const mapStateToProps = (state) => {
   return {
-    approved: state.orderApproved
+    pending: state.orderPending
   }
 }
 const mapDispatchToProps = (dispatch) => {
   return {
-    getApproved: () => { dispatch(getApproved()) }
+    getAllPending: () => { dispatch(getAllPending()) }
   }
 }
 
 export default withRouter(connect(
   mapStateToProps, 
   mapDispatchToProps
-)(MyTicket))
+)(AllPayment))

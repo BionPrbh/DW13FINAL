@@ -10,7 +10,6 @@ export const getCategory = (category_id) => {
     })
   }
 }
-
 export const getCategories = () => {
   return {
     type: GET_ALL_CATEGORIES,

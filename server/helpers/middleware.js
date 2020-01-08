@@ -1,6 +1,5 @@
 const jwt = require("jsonwebtoken");
-const secretKey = 'inilhosecretnya' //process.env.SECRET_KEY;
-
+const secretKey = 'this-is-my-deepest-secret' //process.env.SECRET_KEY;
 
 exports.auth = (req, res, next) => {
   let authHeader = req.headers["authorization"];
@@ -15,7 +14,8 @@ exports.auth = (req, res, next) => {
         });
       }
 
-      req.currentUser = decoded
+      req.id = decoded.id
+      req.email = decoded.email
       next();
     });
   } else {

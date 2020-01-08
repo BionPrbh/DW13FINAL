@@ -11,7 +11,7 @@ class TodayBar extends Component {
   render(){
     const { data, isLoading, error } = this.props.event
     console.log(data,' ===============> ini data dari startTime');
-    
+    let arr = data.slice(0,8)
     return(
       <div className="todaybar" style={{paddingTop: 50}}>
         <div className="todaybar-container">
@@ -20,7 +20,8 @@ class TodayBar extends Component {
           </div>
           <div className="todaybar-content">
             {
-              data.map((details, index) => {
+              
+              arr.map((details, index) => {
                 return(
                   <TodayCard key={index}
                     cardImage={details.img}
@@ -28,6 +29,7 @@ class TodayBar extends Component {
                     cardDate={details.startTime.slice(0,10)}
                     cardDesc={details.description}
                     cardPrice={details.price}
+                    cardId={details.id}
                   />
                 )
               })

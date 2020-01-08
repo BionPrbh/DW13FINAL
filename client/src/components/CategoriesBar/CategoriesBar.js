@@ -24,7 +24,7 @@ class CategoriesBar extends Component {
                   <Button 
                     className="categoryButton"  
                     href={"/category/"+details.id+"/event"}
-                    style={{width:200, fontSize:15, fontWeight:'bold',borderRadius:5, border:'0px', boxShadow:"0 8px 8px 0 rgba(0,0,0,0.2)", transition: '0.3s',height:40, color:'white', backgroundColor:'black'}}>{details.name}</Button>
+                    style={{width:160, fontSize:15, fontWeight:'bold',borderRadius:5, border:'0px', boxShadow:"0 8px 8px 0 rgba(0,0,0,0.2)", transition: '0.3s',height:40, color:'white', backgroundColor:'black'}}>{details.name}</Button>
                   )
               })
             }

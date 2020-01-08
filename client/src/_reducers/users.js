@@ -44,6 +44,8 @@ export const userRegister = (state = initialState, action) => {
         isLoading: false
       };
     case `${REGISTER}_FULFILLED`:
+      localStorage.setItem('_AUTH_TOKEN', action.payload.data.token)
+      window.location.href="http://localhost:3000"
     return {
       ...state,
       data: action.payload.data,

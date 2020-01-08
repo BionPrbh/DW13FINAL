@@ -96,7 +96,3 @@ exports.register = (req, res) => {
       })
     })
 };
-
-exports.userDataRetriever = (req,res) => {
-  
-}

@@ -53,6 +53,7 @@ class EventByCategories extends Component {
                       cardDate={details.startTime.slice(0,10)}
                       cardDesc={details.description}
                       cardPrice={details.price}
+                      cardId={details.id}
                     />
                   )
                 })

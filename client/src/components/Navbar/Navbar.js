@@ -1,5 +1,5 @@
 import React, { Component} from 'react'
-import { IconButton, Link, Avatar } from '@material-ui/core'
+import { IconButton, Link, Avatar, Button } from '@material-ui/core'
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import PersonAddIcon from '@material-ui/icons/PersonAdd';
 import './Navbar.css'
@@ -10,8 +10,8 @@ class Navbar extends Component {
   handleButtonLogout = () => {
     localStorage.clear()
   }
-  componentDidMount() {
-    
+  handleGoHome = () => {
+    window.location.replace("/")
   }
   render(){
     let existed = localStorage.getItem("_AUTH_TOKEN")
@@ -51,7 +51,9 @@ class Navbar extends Component {
       <div className="Navbar">
         <div className="navbar-container">
           <div className="title">
-            <img src={Logo} alt=""/>
+            <Button>
+              <img src={Logo} alt="" onClick={this.handleGoHome}/>
+            </Button>
           </div>
             { loginRegisButton }
         </div>

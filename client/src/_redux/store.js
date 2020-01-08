@@ -1,7 +1,7 @@
 import { createStore, combineReducers, applyMiddleware } from "redux";
 import { category, categoriesAll, categoriesAllEvent } from "../_reducers/categories";
-import { eventToday, eventOne, eventCreate } from "../_reducers/events";
-import { orderCreate, orderConfirmed, orderApproved } from "../_reducers/orders";
+import { eventToday, eventTomorrow, eventOne, eventCreate } from "../_reducers/events";
+import { orderCreate, orderTobePaid, orderPending, orderConfirmed, orderApproved } from "../_reducers/orders";
 import { userLogin, userRegister, userOne, userFavorited } from "../_reducers/users";
 import { promise, logger } from "./middleware";
 
@@ -11,11 +11,14 @@ const rootReducers = combineReducers({
   category,
   categoriesAll,
   categoriesAllEvent,
-  eventToday, 
+  eventToday,
+  eventTomorrow, 
   eventOne, 
   eventCreate,
   orderCreate, 
-  orderConfirmed, 
+  orderTobePaid,
+  orderPending,
+  orderConfirmed,
   orderApproved,
   userLogin, 
   userRegister, 

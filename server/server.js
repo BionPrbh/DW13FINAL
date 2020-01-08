@@ -39,10 +39,10 @@ app.group("/api/v1", router => {
   router.get('/category/:id/events', CategoriesController.getAllEventsOfACategory)
 
   // // ------- EVENTS ------
-  // get events by title
-  router.get('/events', EventsController.getEventByTitle)
   // get events with start_time=2019-12-30
   router.get('/events', EventsController.getEventsQueryToday)
+  // get events by title
+  router.get('/events', EventsController.getEventByTitle)
   // get events with start_time_gte=2019-12-31
   // router.get('/events', EventsController.getEventsQueryTomorrow)
   // get an events
@@ -53,9 +53,11 @@ app.group("/api/v1", router => {
   
   // // ------ ORDER ------
   // GET order with query status approved
-  router.get('/orders', OrdersController.getAllConfirmed)
+  router.get('/orders', auth, OrdersController.getAllApproved)
+  // GET one order to be confirmed
+  router.get('/order/:id', auth, OrdersController.goingToBePaid)
   // POST an order 
-  router.post('/order', OrdersController.newOrder );
+  router.post('/order', auth, OrdersController.newOrder );
   // PUT an order 
   router.put('/order/:id', auth, OrdersController.confirmOrder );
 
@@ -65,9 +67,9 @@ app.group("/api/v1", router => {
   // Register an account
   router.post("/register", ProfilesController.register);
   // Get a user
-  router.get("/profile/:id", ProfilesController.getOne)
+  router.get("/profile", auth, ProfilesController.getOne)
   // Get all favorited event of a user
-  router.get("/user/:id/favorites", ProfilesController.getFavorited)
+  router.get("/user/favorites", auth, ProfilesController.getFavorited)
 });
 
 //Server must to listen to port

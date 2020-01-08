@@ -12,20 +12,38 @@ import EventIcon from '@material-ui/icons/Event';
 import LockIcon from '@material-ui/icons/Lock';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom'
-// import { getUser } from '../../_actions/users'
+import { getUser } from '../../_actions/users'
 
 class PopoverPopupState extends Component {
   componentDidMount() {
-    // this.props.getOne(this.props.user_id)
+    this.props.getUser()
   }
-  
+  handleLogout = () => {
+    localStorage.clear()
+    window.location.replace("/");
+  }
+  handleAddEvent = () => {
+    window.location.replace("/event");
+  }
+  handleProfile = () => {
+    window.location.replace("/profile")
+  }
+  handleMyTicket = () => {
+    window.location.replace("/orders/myticket")
+  }
+  handlePayments = () => {
+    window.location.replace("/payments")
+  }
   render(){
+    const { data } = this.props.userOne
+    console.log(data);
+    
     return (
       <PopupState variant="popover" popupId="demo-popup-popover">
         {popupState => (
           <div>
-            <IconButton style={{marginTop:15}}>
-              <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" {...bindTrigger(popupState)}/>
+            <IconButton style={{marginTop:20}}>
+              <Avatar alt="Remy Sharp" src={data.img} {...bindTrigger(popupState)}/>
             </IconButton>
             <Popover
               {...bindPopover(popupState)}
@@ -40,32 +58,32 @@ class PopoverPopupState extends Component {
             >
               <Box p={2}>
                 <div>
-                  <Link href="/login" underline="none" color="textPrimary" component="button" style={{display:'flex'}}>
+                  <Link to="/profile" underline="none" color="textPrimary" component="button" style={{display:'flex'}}>
                     <AccountBoxIcon style={{color:"#ff5555"}}/>
-                    <p style={{marginTop:0, marginBottom:0, paddingLeft: 10, fontWeight:'bold', fontSize:19, color:"#ff5555"}}>Profile</p>
+                    <p style={{marginTop:0, marginBottom:0, paddingLeft: 10, fontWeight:'bold', fontSize:19, color:"#ff5555"}} onClick={this.handleProfile}>Profile</p>
                   </Link>
                 </div>
                 <div style={{paddingTop:10}}>
-                  <Link href="/" underline="none" color="textPrimary" component="button" style={{display:'flex'}}>
+                  <Link to="/orders/myticket" underline="none" color="textPrimary" component="button" style={{display:'flex'}}>
                     <ConfirmationNumberIcon style={{color:"#ff5555"}}/>
-                    <p style={{marginTop:0, marginBottom:0, paddingLeft: 10, fontWeight:'bold', fontSize:19,color:"#ff5555"}}>My Ticket</p>
+                    <p style={{marginTop:0, marginBottom:0, paddingLeft: 10, fontWeight:'bold', fontSize:19,color:"#ff5555"}} onClick={this.handleMyTicket}>My Ticket</p>
                   </Link>
                 </div>
                 <div style={{paddingTop:10}}>
-                  <Link href="/" underline="none" color="textPrimary" component="button" style={{display:'flex'}}>
+                  <Link to="/payments" underline="none" color="textPrimary" component="button" style={{display:'flex'}} onClick={this.handlePayments}>
                     <LocalAtmIcon style={{color:"#ff5555"}}/>
                     <p style={{marginTop:0, marginBottom:0, paddingLeft: 10, fontWeight:'bold', fontSize:19,color:"#ff5555"}}>Payment</p>
                   </Link>
                 </div>
                 <div style={{paddingTop:10}}>
-                  <Link href="/" underline="none" color="textPrimary" component="button" style={{display:'flex'}}>
+                  <Link underline="none" color="textPrimary" component="button" style={{display:'flex'}} onClick={this.handleAddEvent}>
                     <EventIcon style={{color:"#ff5555"}}/>
-                    <p style={{marginTop:0, marginBottom:0, paddingLeft: 10, paddingBottom:10, fontWeight:'bold', fontSize:19,color:"#ff5555"}}>Add Event</p>
+                    <p style={{marginTop:0, marginBottom:0, paddingLeft: 10, paddingBottom:8, fontWeight:'bold', fontSize:19,color:"#ff5555"}}>Add Event</p>
                   </Link>
                 </div>
                 <hr/>
                 <div style={{paddingTop:5}}>
-                  <Link href="/" underline="none" color="textPrimary" component="button" style={{display:'flex'}}>
+                  <Link to="/" underline="none" color="textPrimary" component="button" style={{display:'flex'}} onClick={this.handleLogout}>
                     <LockIcon style={{color:"#ff5555"}}/>
                     <p style={{marginTop:0, marginBottom:0, paddingLeft: 10, fontWeight:'bold', fontSize:19,color:"#ff5555"}}>Logout</p>
                   </Link>
@@ -82,14 +100,14 @@ class PopoverPopupState extends Component {
     
 const mapStateToProps = (state, ownProps) => {
   return {
-    // userOne: state.userOne,
+    userOne: state.userOne,
     // user_id: ownProps.match.params.id,
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    // getUser: (user_id) => { dispatch(getUser(user_id))}
+    getUser: () => { dispatch(getUser())}
   }
 }
 

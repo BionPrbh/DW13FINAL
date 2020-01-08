@@ -69,10 +69,14 @@ exports.register = (req, res) => {
 
 exports.login = (req, res) => {
   let { username, password } = req.body;
+  console.log(req.body);
+  
   Profiles.findOne({
     where: { username }
   })
     .then(user => {
+      console.log('masuk then login');
+      
       if (user) {
         if (bcrypt.compareSync(password, user.password)) {
           let payload = {
@@ -95,6 +99,8 @@ exports.login = (req, res) => {
       }
     })
     .catch(err => {
+      console.log('masuk catch login');
+
       res.status(500).json({
         msg: "Internal Server Error",
         Error: err
@@ -102,7 +108,7 @@ exports.login = (req, res) => {
     });
 };
 
-exports.getOne = (req,res) => {
+exports.getOne = (req,res) => {  
   Profiles.findOne({
     attributes:{
       exclude:[
@@ -113,7 +119,7 @@ exports.getOne = (req,res) => {
       ]
     },
     where:{
-      id: req.params.id
+      id: req.id
     }
   }).then(data => {
       res.status(200).json(data)
@@ -129,7 +135,7 @@ exports.getOne = (req,res) => {
 exports.getFavorited = (req,res) => {
   Favorites.findAll({
     where:{
-      user_id: req.params.id
+      user_id: req.id
     },
     include:[
       {
@@ -163,57 +169,6 @@ exports.getFavorited = (req,res) => {
       ]
     }
   }).then(data => {
-
-    // let favorited = []
-    // data.map((details) => {
-      // Events.findAll({
-      //   include:[
-      //     {
-      //       model: Categories,
-      //       as: 'category',
-      //       attributes: {
-      //         exclude:[
-      //           "createdAt",
-      //           "updatedAt"
-      //         ]
-      //       }
-      //     },
-      //     {
-      //       model: Profiles,
-      //       as: 'created_by',
-      //       attributes: {
-      //         exclude:[
-      //           "password",
-      //           "img",
-      //           "createdAt",
-      //           "updatedAt"
-      //         ]
-      //       }
-      //     }
-      //   ],
-      //   attributes:{
-      //     exclude:[
-      //       "category_id",
-      //       "createdAt",
-      //       "updatedAt"
-      //     ]
-      //   },
-      //   where:{
-      //     id: details.event_id
-      //   }
-      // }).then(data => {
-      //   res.status(200).json(data)
-      // })
-      // })
       res.send(data)
     })
-    // console.log(favorited);
-    
-    // res.send(favorited)
-    // .catch(err => {
-    //   res.status(404).json({
-    //     msg:'Internal server error',
-    //     err
-    //   })
-    // })
 }

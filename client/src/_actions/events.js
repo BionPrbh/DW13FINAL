@@ -1,4 +1,4 @@
-import { GET_STARTTIME, GET_AN_EVENT, POST_NEW_EVENT } from '../config/constants'
+import { GET_STARTTIME, GET_TOMORROW, GET_AN_EVENT, POST_NEW_EVENT } from '../config/constants'
 import axios from 'axios'
 
 export const getStartTime = () => {
@@ -7,6 +7,15 @@ export const getStartTime = () => {
     payload: axios({
       method: "GET",
       url: "http://localhost:8000/api/v1/events?start_time=2019-12-30"
+    })
+  }
+}
+export const getTomorrow = () => {
+  return {
+    type: GET_TOMORROW,
+    payload: axios({
+      method: "GET",
+      url: "http://localhost:8000/api/v1/events?start_time=2019-12-31"
     })
   }
 }

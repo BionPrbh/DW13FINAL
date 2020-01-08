@@ -14,9 +14,6 @@ class Login extends Component {
       username:"",
       password:""
     }
-    this.handleLogin = this.handleLogin.bind(this)
-    this.handleChangeUsername = this.handleChangeUsername.bind(this)
-    this.handleChangePassword = this.handleChangePassword.bind(this)
   }
   componentDidMount() {
     const loginData = {

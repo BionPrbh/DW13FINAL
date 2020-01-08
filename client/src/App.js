@@ -10,6 +10,7 @@ import EventDetail from './pages/EventDetail/EventDetail'
 import Payment from './pages/Payment/Payment'
 import MyTicket from './pages/MyTicket/MyTicket'
 import AddEvent from './pages/AddEvent/AddEvent'
+import AllPayment from './pages/AllPayment/AllPayment'
 
 function App() {
   return (
@@ -25,10 +26,13 @@ function App() {
           <Route path="/event">
             <AddEvent />
           </Route>
+          <Route path="/payments">
+            <AllPayment />
+          </Route>
           <Route path="/payment/:id">
             <Payment />
           </Route>
-          <Route path="/profile/:id">
+          <Route path="/profile">
             <Profile />
           </Route>
           <Route path="/category/:id/event">

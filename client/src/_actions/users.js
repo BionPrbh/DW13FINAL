@@ -1,5 +1,6 @@
 import { LOGIN, REGISTER, GET_A_USER, GET_USER_FAVORITED } from '../config/constants'
 import axios from 'axios'
+const Token = localStorage.getItem("_AUTH_TOKEN")
 
 export const login = (userData) => {
   return {  
@@ -21,21 +22,23 @@ export const register = (userData) => {
     })
   }
 }
-export const getUser = (user_id) => {
+export const getUser = () => {
   return {
     type: GET_A_USER,
     payload: axios({
       method: "GET",
-      url: `http://localhost:8000/api/v1/profile/${user_id}`
+      headers:{"Authorization":"Bearer "+Token},
+      url: `http://localhost:8000/api/v1/profile`
     })
   }
 }
-export const getUserFavorited = (user_id) => {
+export const getUserFavorited = () => {  
   return {
     type: GET_USER_FAVORITED,
     payload: axios({
       method: "GET",
-      url: `http://localhost:8000/api/v1/user/${user_id}/favorites`
+      headers:{"Authorization":"Bearer "+Token},
+      url: `http://localhost:8000/api/v1/user/favorites`
     })
   }
 }

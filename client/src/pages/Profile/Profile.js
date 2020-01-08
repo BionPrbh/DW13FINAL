@@ -10,13 +10,12 @@ import { withRouter } from 'react-router-dom'
 
 class Profile extends Component {
   componentDidMount(){
-    this.props.getUser(this.props.user_id)
-    this.props.getUserFavorited(this.props.user_id)
+    this.props.getUser()
+    this.props.getUserFavorited()
   }
   render(){
     const { data } = this.props.profile
     const { favorited } = this.props.favorited
-    console.log('ini user id',this.props.user_id);
     console.log('ini datanyaaaa',data);
     console.log('ini datanyaaaa favorited woe',favorited)
     return(
@@ -56,6 +55,7 @@ class Profile extends Component {
                         cardDate={details.favoritedEvent.startTime.slice(0,10)}
                         cardDesc={details.favoritedEvent.description}
                         cardPrice={details.favoritedEvent.price}
+                        cardId={details.favoritedEvent.id}
                       />
                     )
                   })
@@ -82,8 +82,8 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getUser:(user_id) => {dispatch(getUser(user_id))},
-    getUserFavorited:(user_id) => { dispatch(getUserFavorited(user_id))}
+    getUser:() => {dispatch(getUser())},
+    getUserFavorited:() => { dispatch(getUserFavorited())}
   }
 }
 

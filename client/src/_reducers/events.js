@@ -1,8 +1,9 @@
-import { GET_STARTTIME, GET_AN_EVENT, POST_NEW_EVENT } from "../config/constants";
+import { GET_STARTTIME, GET_TOMORROW, GET_AN_EVENT, POST_NEW_EVENT } from "../config/constants";
 
 const initialState = {
   data: [],
   singleEvent:[],
+  dataTomorrow:[],
   isLoading: false
 };
 
@@ -20,6 +21,30 @@ export const eventToday = (state = initialState, action) => {
         isLoading: false
       };
     case `${GET_STARTTIME}_REJECTED`:
+      return {
+        state,
+        isLoading:false
+      };
+      
+  default:
+    return state;
+  }
+};
+
+export const eventTomorrow = (state = initialState, action) => {
+  switch (action.type) {
+    case `${GET_TOMORROW}_PENDING`:
+      return {
+        ...state,
+        isLoading: false
+      };
+    case `${GET_TOMORROW}_FULFILLED`:
+      return {
+        ...state,
+        dataTomorrow: action.payload.data,
+        isLoading: false
+      };
+    case `${GET_TOMORROW}_REJECTED`:
       return {
         state,
         isLoading:false

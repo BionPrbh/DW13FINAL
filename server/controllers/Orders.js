@@ -2,6 +2,8 @@ const Orders = require('../models').Order
 const Events = require('../models').Event
 const Profiles = require('../models').User
 const Categories = require('../models').Category
+const Sequelize = require('sequelize')
+const Op = Sequelize.Op
 
 exports.newOrder = (req,res) => {
   Orders.create(req.body)
@@ -88,9 +90,78 @@ exports.confirmOrder = (req,res) => {
   })
 }
 
-exports.getAllConfirmed = (req,res) => {
-  let states = req.query.status
-  console.log(req.query.status);  
+exports.goingToBePaid = (req,res) => {
+  Orders.findOne({
+    include:[
+      {
+        model:Events,
+        as:'event',
+        attributes:{
+          exclude:[
+            'category_id',
+            'user_id',
+            'createdAt',
+            'updatedAt',    
+          ]
+        },
+        include:[
+          {
+            model:Categories,
+            as:'category',
+            attributes:{
+              exclude:[
+                'createdAt',
+                'updatedAt',
+              ]
+            } 
+          },
+          {
+            model:Profiles,
+            as:'created_by',
+            attributes:{
+              exclude:[
+                'createdAt',
+                'updatedAt',
+                'password'
+              ]
+            }
+          }
+        ]
+      },
+      {
+        model:Profiles,
+        as:'buyer',
+        attributes:{
+          exclude:[
+            'createdAt',
+            'updatedAt',
+            'password'
+          ]
+        }
+      }
+    ],
+    where: { 
+      id: req.params.id,
+      user_id: req.id
+    }
+  }).then(data => {
+    if(data === null){
+      res.status(200).json({msg:'Data not found'})
+    } else {
+      res.status(200).json(data)
+    }
+    })
+    .catch(err => {
+      res.status(500).json({
+        msg:'Internal server error',
+        err
+      })
+    })
+}
+
+exports.getAllApproved = (req,res) => {
+  let status = req.query.status
+      
   Orders.findAll({
     include:[
       {
@@ -141,7 +212,8 @@ exports.getAllConfirmed = (req,res) => {
       }
     ],
     where:{
-      status: states
+        status: status,
+        user_id: req.id
     },
     attributes:{
       exclude:[
